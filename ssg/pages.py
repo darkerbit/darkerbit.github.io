@@ -3,11 +3,12 @@ import mistletoe
 
 
 class Page:
-    def __init__(self, source, kind, kinds, group):
+    def __init__(self, source, name, kind, group):
         self.source = source
+        self.name = name
         self.kind = kind
-        self.kinds = kinds
         self.group = group
+        self.dest = ""
 
         with open(source, "r") as f:
             self.meta = json.loads(f.readline())
@@ -21,6 +22,8 @@ class Page:
         return content
 
     def save(self, dest):
+        self.dest = dest
+
         with open(dest, "w") as f:
             f.write(self.generate())
 
@@ -37,10 +40,35 @@ class MdPage(Page):
         <title>{self.meta["title"]}</title>
     </head>
     <body>
-        <a href="/{self.group}/">Return to {self.kinds}</a>
+        <a href="/{self.group}/">Return to {self.kind}</a>
         <h1>{self.meta["title"]}</h1>
         <h2>{self.kind}</h2>
         {mistletoe.markdown(self.content).strip()}
+    </body>
+</html>
+'''
+
+
+class IndexPage(Page):
+    def __init__(self, *args, files=[]):
+        super().__init__(*args)
+
+        self.files = files
+
+    def generate(self):
+        newline = '\n'
+
+        return f'''<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>{self.kind}</title>
+    </head>
+    <body>
+        <a href="/">Return home</a>
+        <h1>{self.kind}</h1>
+        {mistletoe.markdown(self.content).strip()}
+        {newline.join([f'<a href="/{self.group}/{x.name}.html">{x.meta["title"]}</a>' for x in self.files])}
     </body>
 </html>
 '''
