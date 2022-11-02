@@ -16,7 +16,9 @@ def build_group(group, clazz=ssg.MdPage):
 
     out = []
 
-    for f in tqdm(os.scandir(group)):
+    files = list(os.scandir(group))
+
+    for f in tqdm(files, group):
         page = clazz(f)
         page.save(f"out/{group}/{os.path.splitext(f.name)[0]}.html")
         out.append(page)
