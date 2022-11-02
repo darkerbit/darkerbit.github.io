@@ -5,6 +5,9 @@ description = "Code that generates my website."
 authors = ["darkerbit <mail.darkerbit@gmail.com>"]
 license = "Zlib"
 homepage = "https://darkerbit.github.io"
+packages = [
+    { include = "ssg" },
+]
 
 [tool.poetry.dependencies]
 python = "^3.8"
@@ -14,3 +17,6 @@ python = "^3.8"
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+ssg = "ssg.__main__:main"
