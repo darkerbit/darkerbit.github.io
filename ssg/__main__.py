@@ -44,6 +44,9 @@ def build():
     # Copy assets/
     shutil.copytree("assets/", "out/assets/")
 
+    # Copy robots.txt
+    shutil.copy("robots.txt", "out/robots.txt")
+
     # Page groups
     tech = build_group("tech", "Technology")
 
