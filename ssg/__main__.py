@@ -1,11 +1,41 @@
 import ssg
+
 import sys
+
+import os
+import shutil
+from tqdm import tqdm
+
 import http.server
 import socketserver
 
 
+def build_group(group, clazz=ssg.MdPage):
+    if not os.path.exists(f"out/{group}/"):
+        os.mkdir(f"out/{group}/")
+
+    out = []
+
+    for f in tqdm(os.scandir(group)):
+        page = clazz(f)
+        page.save(f"out/{group}/{os.path.splitext(f.name)[0]}.html")
+        out.append(page)
+
+    return out
+
+
 def build():
-    pass
+    # Remake out/
+    if os.path.exists("out/"):
+        shutil.rmtree("out/")
+
+    os.mkdir("out/")
+
+    # Copy assets/
+    shutil.copytree("assets/", "out/assets/")
+
+    # Page groups
+    writeups = build_group("writeups")
 
 
 class Handler(http.server.SimpleHTTPRequestHandler):
