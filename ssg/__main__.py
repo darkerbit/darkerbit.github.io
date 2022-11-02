@@ -10,7 +10,7 @@ import http.server
 import socketserver
 
 
-def build_group(group, clazz=ssg.MdPage):
+def build_group(group, kind, kinds, clazz=ssg.MdPage):
     if not os.path.exists(f"out/{group}/"):
         os.mkdir(f"out/{group}/")
 
@@ -19,7 +19,7 @@ def build_group(group, clazz=ssg.MdPage):
     files = list(os.scandir(group))
 
     for f in tqdm(files, group):
-        page = clazz(f)
+        page = clazz(f, kind, kinds, group)
         page.save(f"out/{group}/{os.path.splitext(f.name)[0]}.html")
         out.append(page)
 
@@ -37,7 +37,7 @@ def build():
     shutil.copytree("assets/", "out/assets/")
 
     # Page groups
-    writeups = build_group("writeups")
+    writeups = build_group("writeups", "Write-up", "Write-ups")
 
 
 class Handler(http.server.SimpleHTTPRequestHandler):

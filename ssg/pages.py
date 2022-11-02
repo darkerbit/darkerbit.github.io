@@ -3,8 +3,11 @@ import mistletoe
 
 
 class Page:
-    def __init__(self, source):
+    def __init__(self, source, kind, kinds, group):
         self.source = source
+        self.kind = kind
+        self.kinds = kinds
+        self.group = group
 
         with open(source, "r") as f:
             self.meta = json.loads(f.readline())
@@ -34,7 +37,9 @@ class MdPage(Page):
         <title>{self.meta["title"]}</title>
     </head>
     <body>
+        <a href="/{self.group}/">Return to {self.kinds}</a>
         <h1>{self.meta["title"]}</h1>
+        <h2>{self.kind}</h2>
         {mistletoe.markdown(self.content).strip()}
     </body>
 </html>
