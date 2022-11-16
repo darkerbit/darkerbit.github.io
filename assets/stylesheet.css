@@ -10,10 +10,18 @@ body {
 .sheet {
     background-color: white;
     text-align: left;
-    padding: 25px;
-    border-radius: 25px;
     max-width: fit-content;
     margin: auto;
+}
+
+.sheet_big {
+    padding: 25px;
+    border-radius: 25px;
+}
+
+.sheet_small {
+    padding: 10px 25px;
+    border-radius: 25px;
 }
 
 .page_title {
