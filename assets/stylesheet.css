@@ -19,3 +19,8 @@ body {
 .page_title {
     text-align: center;
 }
+
+.highlight {
+    padding: 10px;
+    border-radius: 10px;
+}
