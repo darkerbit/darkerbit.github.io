@@ -9,8 +9,6 @@ import shutil
 from tqdm import tqdm
 
 import http.server
-import socketserver
-import time
 
 
 def build_group(group, kind, clazz=ssg.MdPage):
@@ -59,35 +57,12 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         super().__init__(*args, directory="out/", **kwargs)
 
 
-def serve():
-    build()
-
-    port = 8000
-
-    if len(sys.argv) > 2:
-        port = int(sys.argv[2])
-
-    socketserver.ThreadingTCPServer.allow_reuse_address = True
-    socketserver.ThreadingTCPServer.allow_reuse_port = True
-
-    with socketserver.TCPServer(("", port), Handler) as httpd:
-        print(f"serving at port {port}")
-
-        try:
-            httpd.serve_forever()
-        except:
-            httpd.shutdown()
-
-    time.sleep(3)
-
-
 def timestamp():
     print(datetime.datetime.utcnow().isoformat())
 
 
 commands = {
     "build": build,
-    "serve": serve,
     "timestamp": timestamp,
 }
 

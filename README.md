@@ -13,5 +13,4 @@ First, [install Poetry](https://python-poetry.org/docs/), then install the depen
 After that:
 
 - `poetry run ssg build`: Build the website.
-- `poetry run ssg serve [port]`: Serve the website on `port`. (8000 by default).
 - `poetry run ssg timestamp`: Produce an UTC timestamp to use for article creation and update times.
