@@ -47,3 +47,11 @@ tbody tr:nth-child(even) {
 tbody tr:nth-child(odd) {
     background-color: white;
 }
+
+blockquote {
+    display: inline-block;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #6495ed;
+    color: white;
+}
