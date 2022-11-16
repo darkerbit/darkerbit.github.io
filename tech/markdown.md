@@ -1,6 +1,6 @@
 {"title": "Markdown test sheet", "creation_date": "2022-11-16T08:41:07.421870"}
 
-# Markdown test sheet
+# Heading 1
 
 ## Heading 2
 
@@ -12,8 +12,6 @@ Normal paragraph with *italic* and **bold** text.
 Newline without paragraph break, with ~strikethrough~.
 
 Second paragraph.
-
-## Heading with ID
 
 ```c
 #include <stdio.h>

@@ -32,21 +32,10 @@ class Page:
 
 
 class MdPage(Page):
+    template = open("templates/markdown.html", "r").read()
+
     def generate(self):
-        return f'''<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>{self.meta["title"]}</title>
-    </head>
-    <body>
-        <a href="/{self.group}/">Return to {self.kind}</a>
-        <h1>{self.meta["title"]}</h1>
-        <h2>{self.kind}</h2>
-        {mistletoe.markdown(self.content).strip()}
-    </body>
-</html>
-'''
+        return self.template.format(title=self.meta["title"], kind=self.kind, kind_url=f"/{self.group}/", markdown=mistletoe.markdown(self.content))
 
 
 class IndexPage(Page):
