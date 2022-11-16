@@ -74,7 +74,8 @@ def serve():
             httpd.serve_forever()
         except:
             httpd.shutdown()
-            time.sleep(3)
+
+    time.sleep(3)
 
 
 def timestamp():
