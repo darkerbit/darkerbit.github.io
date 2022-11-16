@@ -1,6 +1,8 @@
 import json
 import mistletoe
 
+from .pygments_renderer import PygmentsRenderer
+
 
 class Page:
     def __init__(self, source, name, kind, group):
@@ -35,7 +37,7 @@ class MdPage(Page):
     template = open("templates/markdown.html", "r").read()
 
     def generate(self):
-        return self.template.format(title=self.meta["title"], kind=self.kind, kind_url=f"/{self.group}/", markdown=mistletoe.markdown(self.content))
+        return self.template.format(title=self.meta["title"], kind=self.kind, kind_url=f"/{self.group}/", markdown=mistletoe.markdown(self.content, renderer=PygmentsRenderer).strip())
 
 
 class IndexPage(Page):
@@ -56,7 +58,7 @@ class IndexPage(Page):
     <body>
         <a href="/">Return home</a>
         <h1>{self.kind}</h1>
-        {mistletoe.markdown(self.content).strip()}
+        {mistletoe.markdown(self.content, renderer=PygmentsRenderer).strip()}
         {newline.join([f'<a href="/{self.group}/{x.name}.html">{x.meta["title"]}</a>' for x in self.files])}
     </body>
 </html>
