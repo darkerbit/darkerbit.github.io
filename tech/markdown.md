@@ -27,7 +27,7 @@ int main(int argc, char **argv)
 }
 ```
 
-<h2 id="link-here">Link from earlier goes here</h3>
+<h2 id="link-here">Link from earlier goes here</h2>
 
 > "Don't believe every quote you see on the internet", Albert Einstein, probably
 
