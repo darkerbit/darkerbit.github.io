@@ -67,10 +67,10 @@ def serve():
     if len(sys.argv) > 2:
         port = int(sys.argv[2])
 
-    with socketserver.TCPServer(("", port), Handler) as httpd:
-        httpd.allow_reuse_port = True
-        httpd.allow_reuse_address = True
+    socketserver.ThreadingTCPServer.allow_reuse_address = True
+    socketserver.ThreadingTCPServer.allow_reuse_port = True
 
+    with socketserver.TCPServer(("", port), Handler) as httpd:
         print(f"serving at port {port}")
 
         try:
