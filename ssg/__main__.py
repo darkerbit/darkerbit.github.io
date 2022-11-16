@@ -10,6 +10,7 @@ from tqdm import tqdm
 
 import http.server
 import socketserver
+import time
 
 
 def build_group(group, kind, clazz=ssg.MdPage):
@@ -68,7 +69,12 @@ def serve():
 
     with socketserver.TCPServer(("", port), Handler) as httpd:
         print(f"serving at port {port}")
-        httpd.serve_forever()
+
+        try:
+            httpd.serve_forever()
+        except:
+            httpd.shutdown()
+            time.sleep(1)
 
 
 def timestamp():
