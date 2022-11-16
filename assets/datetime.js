@@ -2,7 +2,12 @@
     const month_names = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
     for (let element of document.getElementsByClassName("datetime")) {
-        let date = new Date(element.dataset.timestamp + "Z")
+        let stamp = element.dataset.timestamp
+
+        if (!stamp.endsWith("Z"))
+            stamp += "Z"
+
+        let date = new Date(stamp)
 
         let time = date.getHours().toString().padStart(2, "0") + ":" + date.getMinutes().toString().padStart(2, "0")
 
