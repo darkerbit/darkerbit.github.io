@@ -1,0 +1,16 @@
+body {
+    background-color: #6495ed;
+    text-align: center;
+}
+
+.sheet {
+    display: inline-block;
+    background-color: white;
+    text-align: left;
+    padding: 25px;
+    border-radius: 25px;
+}
+
+#page_title {
+    text-align: center;
+}
