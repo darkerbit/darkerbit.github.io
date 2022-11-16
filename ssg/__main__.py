@@ -68,6 +68,9 @@ def serve():
         port = int(sys.argv[2])
 
     with socketserver.TCPServer(("", port), Handler) as httpd:
+        httpd.allow_reuse_port = True
+        httpd.allow_reuse_address = True
+
         print(f"serving at port {port}")
 
         try:
