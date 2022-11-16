@@ -7,7 +7,7 @@ from .pygments_renderer import PygmentsRenderer
 
 
 generate_time = datetime.utcnow()
-describe = subprocess.check_output("git describe --all --long", shell=True, encoding="utf-8")
+describe = subprocess.check_output("git describe --all --long", shell=True, encoding="utf-8").strip()
 
 
 class Page:
