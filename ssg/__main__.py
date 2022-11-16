@@ -1,3 +1,5 @@
+import datetime
+
 import ssg
 
 import sys
@@ -69,9 +71,14 @@ def serve():
         httpd.serve_forever()
 
 
+def timestamp():
+    print(datetime.datetime.utcnow().isoformat())
+
+
 commands = {
     "build": build,
     "serve": serve,
+    "timestamp": timestamp,
 }
 
 
