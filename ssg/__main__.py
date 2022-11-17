@@ -45,6 +45,9 @@ def build():
     # Copy assets/
     shutil.copytree("assets/", "out/assets/")
 
+    # Copy favicons
+    shutil.copytree("favicons/", "out/", dirs_exist_ok=True)
+
     # Copy robots.txt
     shutil.copy("robots.txt", "out/robots.txt")
 
