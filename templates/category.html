@@ -7,15 +7,15 @@
     </head>
     <body>
         <div class="sheet_wrapper">
-            <div class="sheet sheet_big">
-                <a class="return_link" href="{kind_url}">Back to {kind}</a>
+            <div class="sheet sheet_small">
                 <h1 class="page_title">{title}</h1>
-                <h3 class="page_title">Created on <span class="datetime" data-timestamp="{timestamp_create}">{datetime_create} UTC</span></h3>
-                {if_update}<h3 class="page_title">Last updated on <span class="datetime" data-timestamp="{timestamp_update}">{datetime_update} UTC</span></h3>
                 <div class="markdown">
                     {markdown}
                 </div>
             </div>
+        </div>
+        <div class="pages">
+            {pages}
         </div>
         <div class="sheet_wrapper">
             <div class="sheet sheet_small">
