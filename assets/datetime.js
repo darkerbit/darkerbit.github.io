@@ -11,6 +11,6 @@
 
         let time = date.getHours().toString().padStart(2, "0") + ":" + date.getMinutes().toString().padStart(2, "0")
 
-        element.innerHTML = month_names[date.getMonth()] + " " + date.getDate().toString().padStart(2, "0") + " " + date.getFullYear() + " at " + time
+        element.innerHTML = date.getDate().toString().padStart(2, "0") + " " + month_names[date.getMonth()] + " " + date.getFullYear() + " at " + time
     }
 })()

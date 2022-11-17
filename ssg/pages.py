@@ -61,8 +61,8 @@ class MdPage(Page):
     template_no_update = "\n".join(x for x in template.split("\n") if not x.lstrip().startswith("{if_update}"))
 
     def generate(self):
-        self.meta["datetime_create"] = datetime.fromisoformat(self.meta["creation_date"]).strftime("%B %d %Y at %H:%M")
-        self.meta["datetime_update"] = datetime.fromisoformat(self.meta["update_date"]).strftime("%B %d %Y at %H:%M") if "update_date" in self.meta else ""
+        self.meta["datetime_create"] = datetime.fromisoformat(self.meta["creation_date"]).strftime("%d %B %Y at %H:%M")
+        self.meta["datetime_update"] = datetime.fromisoformat(self.meta["update_date"]).strftime("%d %B %Y at %H:%M") if "update_date" in self.meta else ""
 
         template = self.template if "update_date" in self.meta else self.template_no_update
 
@@ -72,7 +72,7 @@ class MdPage(Page):
                                if_update="",
                                timestamp_update=self.meta["update_date"] if "update_date" in self.meta else "",
                                datetime_update=self.meta["datetime_update"],
-                               timestamp_generate=generate_time.isoformat(), datetime_generate=generate_time.strftime("%B %d %Y at %H:%M"),
+                               timestamp_generate=generate_time.isoformat(), datetime_generate=generate_time.strftime("%d %B %Y at %H:%M"),
                                describe=describe, link=f"https://github.com/darkerbit/darkerbit.github.io/blob/main/{self.group}/{self.name}.md",
                                head=head, header=header)
 
@@ -89,7 +89,7 @@ class IndexPage(Page):
     def generate(self):
         return self.template.format(title=self.kind, markdown=mistletoe.markdown(self.content, renderer=PygmentsRenderer).strip(),
                                     pages='\n'.join(generate_page(x) for x in self.files),
-                                    timestamp_generate=generate_time.isoformat(), datetime_generate=generate_time.strftime("%B %d %Y at %H:%M"),
+                                    timestamp_generate=generate_time.isoformat(), datetime_generate=generate_time.strftime("%d %B %Y at %H:%M"),
                                     describe=describe, link=f"https://github.com/darkerbit/darkerbit.github.io/blob/main/{self.group}/{self.name}.md",
                                     head=head, header=header)
 
@@ -105,6 +105,6 @@ class HomePage(Page):
     def generate(self):
         return self.template.format(describe=describe, link=f"https://github.com/darkerbit/darkerbit.github.io/blob/main/index.md",
                                     markdown=mistletoe.markdown(self.content, renderer=PygmentsRenderer).strip(),
-                                    timestamp_generate=generate_time.isoformat(), datetime_generate=generate_time.strftime("%B %d %Y at %H:%M"),
+                                    timestamp_generate=generate_time.isoformat(), datetime_generate=generate_time.strftime("%d %B %Y at %H:%M"),
                                     head=head, header=header,
                                     pages='\n'.join(generate_page(x) for x in self.pages))
