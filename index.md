@@ -14,6 +14,12 @@ and if you don't have JS the times are simply displayed in UTC.
 
 ---
 
+## What's on this website?
+
+### [Technology](/tech/): Me ranting about how all technology kinda sucks actually
+
+---
+
 ## Who am I anyway?
 
 I'm darkerbit. I am a Finnish programmer and electronics student who enjoys cobbling together things like this in my spare time.
@@ -28,6 +34,8 @@ My favourite [Doctor](https://en.wikipedia.org/wiki/Doctor_Who) is Patrick Troug
 - [omoribot](https://github.com/darkerbit/omoribot3), a Discord bot that creates OMORI-styled textboxes.
 
 Most of my work isn't public so my GitHub is rather... barren at present :P
+
+---
 
 ## My stuff
 
