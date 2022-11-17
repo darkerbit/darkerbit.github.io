@@ -10,7 +10,8 @@ body {
 .sheet {
     background-color: white;
     text-align: left;
-    max-width: fit-content;
+    width: fit-content;
+    max-width: 64em;
     margin: auto;
 }
 
