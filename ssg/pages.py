@@ -10,6 +10,7 @@ generate_time = datetime.utcnow()
 describe = subprocess.check_output("git describe --all --long", shell=True, encoding="utf-8").strip()
 
 head = open("templates/head.html", "r").read().strip()
+header = open("templates/header.html", "r").read().strip()
 
 
 class Page:
@@ -59,7 +60,7 @@ class MdPage(Page):
                                datetime_update=self.meta["datetime_update"],
                                timestamp_generate=generate_time.isoformat(), datetime_generate=generate_time.strftime("%B %d %Y at %H:%M"),
                                describe=describe, link=f"https://github.com/darkerbit/darkerbit.github.io/blob/main/{self.group}/{self.name}.md",
-                               head=head)
+                               head=head, header=header)
 
 
 class IndexPage(Page):
@@ -87,4 +88,4 @@ class IndexPage(Page):
                                     pages='\n'.join(self.generate_page(x) for x in self.files),
                                     timestamp_generate=generate_time.isoformat(), datetime_generate=generate_time.strftime("%B %d %Y at %H:%M"),
                                     describe=describe, link=f"https://github.com/darkerbit/darkerbit.github.io/blob/main/{self.group}/{self.name}.md",
-                                    head=head)
+                                    head=head, header=header)
