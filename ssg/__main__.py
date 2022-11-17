@@ -52,10 +52,10 @@ def build():
     shutil.copy("robots.txt", "out/robots.txt")
 
     # Page groups
-    tech = build_group("tech", "Technology")
+    pages = build_group("tech", "Technology")
 
     # Home page
-    ssg.HomePage("index.md", "index", "", "").save("out/index.html")
+    ssg.HomePage("index.md", "index", "", "", pages=pages).save("out/index.html")
 
 
 class Handler(http.server.SimpleHTTPRequestHandler):

@@ -12,6 +12,20 @@ describe = subprocess.check_output("git describe --all --long", shell=True, enco
 head = open("templates/head.html", "r").read().strip()
 header = open("templates/header.html", "r").read().strip()
 
+page_template = open("templates/page.html", "r").read().strip()
+page_template_no_update = "\n".join(x for x in page_template.split("\n") if not x.lstrip().startswith("{if_update}"))
+
+
+def generate_page(page):
+    template = page_template if "update_date" in page.meta else page_template_no_update
+
+    return template.format(link=f"/{page.group}/{page.name}.html", title=page.meta["title"], summary=page.meta["summary"],
+                           timestamp_create=page.meta["creation_date"], datetime_create=page.meta["datetime_create"],
+                           if_update="",
+                           timestamp_update=page.meta["update_date"] if "update_date" in page.meta else "",
+                           datetime_update=page.meta["datetime_update"],
+                           group=page.group, kind=page.kind)
+
 
 class Page:
     def __init__(self, source, name, kind, group):
@@ -65,27 +79,16 @@ class MdPage(Page):
 
 class IndexPage(Page):
     template = open("templates/category.html", "r").read()
-    page_template = open("templates/page.html", "r").read().strip()
-    page_template_no_update = "\n".join(x for x in page_template.split("\n") if not x.lstrip().startswith("{if_update}"))
+
 
     def __init__(self, *args, files=[]):
         super().__init__(*args)
 
         self.files = files
 
-    @classmethod
-    def generate_page(cls, page):
-        template = cls.page_template if "update_date" in page.meta else cls.page_template_no_update
-
-        return template.format(link=f"/{page.group}/{page.name}.html", title=page.meta["title"], summary=page.meta["summary"],
-                               timestamp_create=page.meta["creation_date"], datetime_create=page.meta["datetime_create"],
-                               if_update="",
-                               timestamp_update=page.meta["update_date"] if "update_date" in page.meta else "",
-                               datetime_update=page.meta["datetime_update"])
-
     def generate(self):
         return self.template.format(title=self.kind, markdown=mistletoe.markdown(self.content, renderer=PygmentsRenderer).strip(),
-                                    pages='\n'.join(self.generate_page(x) for x in self.files),
+                                    pages='\n'.join(generate_page(x) for x in self.files),
                                     timestamp_generate=generate_time.isoformat(), datetime_generate=generate_time.strftime("%B %d %Y at %H:%M"),
                                     describe=describe, link=f"https://github.com/darkerbit/darkerbit.github.io/blob/main/{self.group}/{self.name}.md",
                                     head=head, header=header)
@@ -94,8 +97,14 @@ class IndexPage(Page):
 class HomePage(Page):
     template = open("templates/index.html", "r").read()
 
+    def __init__(self, *args, pages=[]):
+        super().__init__(*args)
+
+        self.pages = sorted(pages, reverse=True, key=lambda x: datetime.fromisoformat(x.meta["creation_date"]))[:5]
+
     def generate(self):
         return self.template.format(describe=describe, link=f"https://github.com/darkerbit/darkerbit.github.io/blob/main/index.md",
                                     markdown=mistletoe.markdown(self.content, renderer=PygmentsRenderer).strip(),
                                     timestamp_generate=generate_time.isoformat(), datetime_generate=generate_time.strftime("%B %d %Y at %H:%M"),
-                                    head=head, header=header)
+                                    head=head, header=header,
+                                    pages='\n'.join(generate_page(x) for x in self.pages))

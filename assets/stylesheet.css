@@ -28,6 +28,12 @@ body {
     text-align: center;
 }
 
+.page_category {
+    display: inline-block;
+    margin-right: 5px;
+    margin-bottom: 10px;
+}
+
 .highlight {
     padding: 10px;
     border-radius: 10px;
