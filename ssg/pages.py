@@ -89,3 +89,13 @@ class IndexPage(Page):
                                     timestamp_generate=generate_time.isoformat(), datetime_generate=generate_time.strftime("%B %d %Y at %H:%M"),
                                     describe=describe, link=f"https://github.com/darkerbit/darkerbit.github.io/blob/main/{self.group}/{self.name}.md",
                                     head=head, header=header)
+
+
+class HomePage(Page):
+    template = open("templates/index.html", "r").read()
+
+    def generate(self):
+        return self.template.format(describe=describe, link=f"https://github.com/darkerbit/darkerbit.github.io/blob/main/index.md",
+                                    markdown=mistletoe.markdown(self.content, renderer=PygmentsRenderer).strip(),
+                                    timestamp_generate=generate_time.isoformat(), datetime_generate=generate_time.strftime("%B %d %Y at %H:%M"),
+                                    head=head, header=header)

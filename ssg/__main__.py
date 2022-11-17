@@ -54,6 +54,9 @@ def build():
     # Page groups
     tech = build_group("tech", "Technology")
 
+    # Home page
+    ssg.HomePage("index.md", "index", "", "").save("out/index.html")
+
 
 class Handler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
